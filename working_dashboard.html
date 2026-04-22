@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IMSI Live Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="10">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        h1 { color: #00ff00; text-align: center; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+        .card { background: #1a1a1a; border-radius: 10px; padding: 20px; text-align: center; border-left: 4px solid #00ff00; }
+        .card h3 { margin: 0 0 10px 0; color: #888; }
+        .number { font-size: 48px; font-weight: bold; color: #00ff00; }
+        .operator-list { background: #1a1a1a; border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .operator-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #333; }
+        .telenor { color: #800080; }
+        .zong { color: #ff4444; }
+        .ufone { color: #ffaa00; }
+        .jazz { color: #4444ff; }
+        .recent { background: #1a1a1a; border-radius: 10px; padding: 20px; margin-top: 20px; max-height: 300px; overflow-y: auto; }
+        .recent-item { font-family: monospace; padding: 5px; border-bottom: 1px solid #333; font-size: 12px; }
+        .timestamp { color: #888; }
+        .refresh { text-align: center; margin: 20px; color: #888; font-size: 12px; }
+        .anomaly { color: #ff4444; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        button { background: #00ff00; color: #000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 10px; }
+        button:hover { background: #00cc00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📡 IMSI LIVE DASHBOARD</h1>
+        
+        <div style="text-align: center;">
+            <button onclick="location.reload()">🔄 Refresh Data</button>
+        </div>
+        
+        <div class="stats">
+            <div class="card">
+                <h3>📱 Total Devices</h3>
+                <div class="number" id="totalDevices">--</div>
+            </div>
+            <div class="card">
+                <h3>📊 Total Detections</h3>
+                <div class="number" id="totalDetections">--</div>
+            </div>
+            <div class="card">
+                <h3>📡 Active Operators</h3>
+                <div class="number" id="activeOps">--</div>
+            </div>
+            <div class="card">
+                <h3>⏱️ Last Update</h3>
+                <div class="number" id="lastUpdate" style="font-size: 16px;">--</div>
+            </div>
+        </div>
+        
+        <div class="operator-list">
+            <h3>📊 Operator Distribution</h3>
+            <div id="operatorStats">Loading...</div>
+        </div>
+        
+        <div class="recent">
+            <h3>🕐 Recent IMSI Detections</h3>
+            <div id="recentList">Loading...</div>
+        </div>
+        
+        <div class="refresh">
+            Page auto-refreshes every 10 seconds
+        </div>
+    </div>
+
+    <script>
+        function loadData() {
+            // For demo, we'll show sample data
+            // In real deployment, this would fetch from your API
+            document.getElementById('totalDevices').innerHTML = '156';
+            document.getElementById('totalDetections').innerHTML = '2,495';
+            document.getElementById('activeOps').innerHTML = '3';
+            document.getElementById('lastUpdate').innerHTML = new Date().toLocaleTimeString();
+            
+            document.getElementById('operatorStats').innerHTML = `
+                <div class="operator-item">
+                    <span class="telenor">Telenor</span>
+                    <span>1,492 (59.8%)</span>
+                </div>
+                <div class="operator-item">
+                    <span class="zong">Zong</span>
+                    <span>623 (25.0%)</span>
+                </div>
+                <div class="operator-item">
+                    <span class="ufone">Ufone</span>
+                    <span>249 (10.0%)</span>
+                </div>
+                <div class="operator-item">
+                    <span class="jazz">Jazz</span>
+                    <span>131 (5.2%)</span>
+                </div>
+            `;
+            
+            let recentHtml = '';
+            for(let i = 0; i < 10; i++) {
+                recentHtml += `<div class="recent-item">
+                    <span class="timestamp">${new Date().toLocaleTimeString()}</span>
+                    <span class="telenor"> Telenor</span>
+                    <span> 410 06 ****${Math.floor(Math.random()*10000)}</span>
+                </div>`;
+            }
+            document.getElementById('recentList').innerHTML = recentHtml;
+        }
+        
+        loadData();
+    </script>
+</body>
+</html>
