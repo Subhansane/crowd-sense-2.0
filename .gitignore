@@ -38,3 +38,20 @@ Thumbs.db
 .venv/
 heatmap_env/
 ai_env/
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets / config
+*service-account*.json
+config.yaml
+
+# Logs / downloads
+wget-log
+*.tgz
+*.zip
+
+# OS
+.DS_Store
