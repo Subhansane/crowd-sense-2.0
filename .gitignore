@@ -1,0 +1,40 @@
+# Virtual environment (HUGE - 3GB likely)
+ai_env/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Data files (large)
+*.csv
+*.db
+*.log
+imsi_output.txt
+*.json
+*.pkl
+
+# Model files (large)
+*.keras
+*.h5
+*.model
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+.venv/
+heatmap_env/
+ai_env/
